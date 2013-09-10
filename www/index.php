@@ -73,6 +73,27 @@ foreach($inf_files as $file) {
     }
 }
 
+// Get a list of all the host names seen while recording (and used by the snapshots)
+$snapshot_hosts_file = $snapshots_dir . '/HostNames.dat';
+$hosts = array();
+if (file_exists($snapshot_hosts_file)) {
+    $snapshot_hosts_file_contents = parse_ini_file($snapshot_hosts_file);
+    $hosts = array_keys($snapshot_hosts_file_contents);
+} else {
+    error_page(500, "Could not find hostname snapshots file in the VuGen script folder: {$snapshot_hosts}.");
+    exit();
+}
+
+// Check that all hostnames have been added to the hosts file (C:\WINDOWS\system32\drivers\etc\hosts)
+foreach($hosts as $host) {
+    if (gethostbyname($host) != '127.0.0.1') {
+        error_page(500, 'You must add this to your Windows hosts file (C:\WINDOWS\system32\drivers\etc\hosts):<br/>' . 
+                        '# Added for VuGen Local Replay (remove after script development is complete)<br/>' . 
+                        '127.0.0.1       ' . implode("<br />\n127.0.0.1       ", $hosts));
+        exit();
+    }
+}
+
 // Figure out which file to retun for the request (may return a 404 if not found)
 $request_url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 if (array_key_exists($request_url, $request_response_map)) {
