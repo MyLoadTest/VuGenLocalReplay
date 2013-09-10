@@ -1,0 +1,18 @@
+# http://randomtype.ca/blog/the-wordpress-htaccess-file-explained/
+
+<IfModule mod_rewrite.c>  
+RewriteEngine On  
+RewriteBase /  
+
+RewriteRule ^index\.php$ - [L]  
+RewriteCond %{REQUEST_FILENAME} !-f  
+RewriteCond %{REQUEST_FILENAME} !-d  
+RewriteRule . /index.php [L]  
+</IfModule>  
+
+# to test that this is working, add .htpasswd directives, and see if it pops up an authentication dialog.
+
+
+AuthUserFile /full/path/to/.htpasswd
+AuthName "Please Log In"
+AuthType Basic
