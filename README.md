@@ -28,7 +28,6 @@ The installation instructions assume that you are using Windows.
         # Change this...
         DocumentRoot "c:/wamp/www"
         <Directory "c:/wamp/www">
-        
         # ...to this...
         DocumentRoot "C:\Documents and Settings\Administrator\My Documents\GitHub\VuGenLocalReplay/www"
         <Directory "C:\Documents and Settings\Administrator\My Documents\GitHub\VuGenLocalReplay/www">
@@ -37,10 +36,9 @@ The installation instructions assume that you are using Windows.
     Click on the WampServer icon in the system tray, and select "Restart All Services".
     Confirm that your changes worked, by navigating to [http://localhost/](http://localhost/).
     You should see the VuGenLocalReplay homepage.
-    
 4.  Copy a recently recorded VuGen script to .\GitHub\VuGenLocalReplay\www\vugen
     Note that there should only be one VuGen script in this directory at a time.
-5.  Open http://localhost/ for further configuration instructions.
+5.  Open [http://localhost/](http://localhost/) for further configuration instructions.
     It will instruct you to modify your hosts file (C:\WINDOWS\system32\drivers\etc\hosts)
     and may also require you to change the listening ports in the httpd.conf file. 
     
@@ -50,3 +48,4 @@ Potential Problems
 *   Sites that use HTTPS
 *   Websites that include content from multiple host names
 *   Websites that do not run on port 80, or that run on multiple ports
+*   HTTP redirects
